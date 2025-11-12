@@ -210,3 +210,12 @@ def get_perm(num):
             result+="-"
 
     return result
+
+def scroll_text(text,pos,size,direction,):
+    #direction 1 : left | -1 : right
+    result = text[ max(0,direction+pos) : size + direction + pos]
+    print(result)
+    return result
+    pass
+
+scroll_text("texscrt",0,5,-1)

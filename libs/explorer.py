@@ -29,6 +29,7 @@ class File_Explorer:
             for y,x in enumerate( self.files ):
                 if "." in x:
                     extension = x.rsplit(".",1) [1]
+
                 else:
                     extension = ""
 
@@ -36,9 +37,6 @@ class File_Explorer:
                     self.extensions.append(extension)
 
                 self.files[y] = [ x, extension ]
-
-            print(self.files)
-
 
         def open_file(self):
             pass
@@ -63,15 +61,11 @@ class File_Explorer:
                 perm = get_perm(perm)
                 self.files[y].append(perm)
 
-            print(self.files)
 
         def get_folder_info(self):
             pass
 
         def get_input(self):
-            pass
-
-        def scroll_text(self):
             pass
 
         def display(self):
