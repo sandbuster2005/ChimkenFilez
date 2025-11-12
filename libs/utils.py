@@ -1,5 +1,5 @@
 #made by sand
-from math import ceil
+from math import ceil,log,floor
 def white(x:int=60):
     """
     cette fonction passe un nombre x de ligne
@@ -115,8 +115,8 @@ def ask_list(liste, text = "" , num = True ):
     cette fonction affiche a l'utilisateur une liste et lui demande
     une valeur a l'aide d un prompt text
     """
-    self.show_list( liste, num )
-    return self.ask( f"{ text }" )
+    show_list( liste, num )
+    return ask( f"{ text }" )
 
 def dumb_closest(num:int ,liste:sorted) -> int:
     """
@@ -176,3 +176,19 @@ def rotate_tableau(liste, add = True, val = None):
                  result[ index ].append( val )
                  
     return result
+
+def convertion(number,precision = 4 ,extension = "b",base = 1000, names = [" ","K","M","G","T","P","E","Z","Y","R","Q"]):
+    power = floor( log( number ,base) )
+    num = number / base ** power
+
+    a = f"{ round( number / base ** power , precision -  ( floor( log(num , 10) ) +1  ) )}"
+    spaces = max (0, 5 - len(a) ) * " "
+    if power <= len(names):
+        return f"{a} {spaces}{ names[ power ] }{ extension }"
+
+    else:
+        Raise("value too big for provided notation")
+
+
+def convert_time(time):
+    pass
