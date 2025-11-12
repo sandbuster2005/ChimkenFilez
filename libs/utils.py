@@ -189,6 +189,24 @@ def convertion(number,precision = 4 ,extension = "b",base = 1000, names = [" ","
     else:
         Raise("value too big for provided notation")
 
+def get_perm(num):
+    result=""
+    for x in str(num):
+        y = int(x)
 
-def convert_time(time):
-    pass
+        if y >= 4:
+            result+="r"
+        else:
+            result+="-"
+
+        if y in [2,3,6,7]:
+            result += "w"
+        else:
+            result+="-"
+
+        if y % 2 ==1:
+            result+="x"
+        else:
+            result+="-"
+
+    return result

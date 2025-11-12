@@ -1,5 +1,6 @@
 import os
 import pwd
+import time
 from utils import *
 class File_Explorer:
         def __init__(self,path):
@@ -48,16 +49,21 @@ class File_Explorer:
 
                 size = info.st_size # convert bytes to kb ,mb ...
                 size = convertion( size )
+                self.files[y].append(size)
 
                 last_edit = info.st_mtime # format time
-                size =
+                last_edit = time.strftime("%Y-%m-%d %H:%M:%S", time.strptime( time.ctime ( last_edit ) ) )
+                self.files[y].append(last_edit)
 
                 owner = info.st_uid
                 owner = pwd.getpwuid( owner ).pw_name
+                self.files[y].append(owner)
 
                 perm = oct(info.st_mode)[-3:]
+                perm = get_perm(perm)
+                self.files[y].append(perm)
 
-                print(size,owner,last_edit,perm)
+            print(self.files)
 
         def get_folder_info(self):
             pass
