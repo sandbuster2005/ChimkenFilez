@@ -168,7 +168,7 @@ def convertion( number : int ,precision : int = 4,extension : str = "b", base : 
     else:
         raise "value too big for provided notation"
 
-def get_perm( num : int ) -> list :
+def get_perm( num : int|str ) -> list :
     """
     cette fonction renvoie les permission (rwx) d un fichier a partir du nombre
     """

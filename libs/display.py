@@ -1,6 +1,6 @@
 import os
 from math import ceil
-from libs.readchar import readchar
+from readchar import readchar
 
 def white( n = 40 ):
     for x in range(n):

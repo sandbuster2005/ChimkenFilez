@@ -39,6 +39,7 @@ def readkey() -> str:
     if c1 != "\x1B":
         return c1
 
+    print(sys.stdin.read(1))
     c2 = readchar()
     if c2 not in "\x4F\x5B":
         return c1 + c2
