@@ -1,9 +1,10 @@
 import os
 from math import ceil
-from readchar import readchar
+from terminal import ninput
+from collections.abc import Callable
 
 def white( n = 40 ):
-    for x in range(n):
+    for x in range( n ):
         print( "\n" )
 
 class Display:
@@ -12,26 +13,26 @@ class Display:
         self.graphic_manager = "base"
         self.confirmation = "your choice"
 
-    def ask(self, text: str ) -> str | None :
+    def ask(self, text: str , *arg , **kwargs) -> str | None :
         """
         cette fonction permet de demander une valeur a l'utilisateur
         en lui demandant text
         """
         if self.graphic_manager == "base":
-            return input( f"{ text }" )
+            return ninput( text = f"{ text }",*arg , **kwargs )
 
         else:
             return None
 
 
-    def show_list(self, liste : list , num : bool = True, start :int = 0) -> None :
+    def show_list(self, liste : list , num : bool = True, start : int = 0 , iterable = range) -> None :
         """
         cette fonction permet d afficher les elements d'une liste un
         par un ,numeroté ou non
         """
         if self.graphic_manager == "base":
             if num :
-                for x in range( len( liste ) ):
+                for x in iterable( len( liste ) ):
                     print(x + start, liste[ x ] )
 
             else:
@@ -39,7 +40,7 @@ class Display:
                     print( x )
 
 
-    def ask_list(self, liste : list, text : str = "", num : bool = True) -> str | None :
+    def ask_list(self, liste : list, text : str = "", num : bool = True , iterable = range , *arg : Callable , **kwargs : str | list[ str ] ) -> str | None :
         """
         cette fonction affiche a l'utilisateur une liste et lui demande
         une valeur a l'aide d un prompt text
@@ -48,15 +49,15 @@ class Display:
             text = self.confirmation
 
         if self.graphic_manager == "base":
-            if len(liste) > self.term_size.lines:
+            if len( liste ) > self.term_size.lines:
                 n = 0
                 word = "n"
                 size = self.term_size.lines
 
                 while word == "n" or word == "p":
-                    self.show_list(liste[n * ( size - 2 ): (n + 1) * ( size - 2 ) ], start = n * ( size - 2) )
-                    self.show_list( [ "p : previous page", "n : next page" ], num=False )
-                    word = self.ask( f"{ text }" )
+                    self.show_list(liste[n * ( size - 2 ): (n + 1) * ( size - 2 ) ], start = n * ( size - 2) , iterable = iterable )
+                    self.show_list( [ "p : previous page", "n : next page" ], num = False , iterable = iterable )
+                    word = self.ask( f"{ text }", *arg , **kwargs )
                     white()
 
                     if word == "n":
@@ -68,13 +69,8 @@ class Display:
                 return word
 
             else:
-                self.show_list( liste, num )
-
-                if len( liste ) < 11:
-                    return readchar()
-
-                else:
-                    return self.ask( f"{ text }" )
+                self.show_list( liste, num , iterable = iterable )
+                return self.ask( f"{ text }", *arg , **kwargs )
 
         else:
             return None

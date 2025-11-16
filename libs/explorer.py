@@ -2,8 +2,7 @@ import os
 import pwd
 import time
 from utils import *
-from Nreadchar import ReadChar
-from key import Key
+from terminal import ReadChar, Key
 class FileExplorer:
         def __init__(self,path):
             if path:
@@ -52,7 +51,7 @@ class FileExplorer:
         def close(self):
             pass
 
-        def execute(self)!
+        def execute(self):
             pass
         def get_file_info(self):
             for y,x in enumerate(self.files):
